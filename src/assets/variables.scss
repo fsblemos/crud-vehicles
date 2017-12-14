@@ -1,0 +1,9 @@
+@import '../../node_modules/bulma/sass/utilities/initial-variables.sass';
+@import '../../node_modules/bulma/sass/utilities/functions.sass';
+
+$primary: #4ab858;
+$danger: #b44747;
+
+$control-height: 40px;
+
+@import '../../node_modules/bulma/sass/utilities/derived-variables.sass';
