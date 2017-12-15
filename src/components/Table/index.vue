@@ -2,12 +2,12 @@
   <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
-        <th v-for="column in columns">{{ column.title }}</th>
+        <th v-for="column in columns">{{ column.label }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, index) in rows">
-        <slot v-for="column in columns" :row="row" :column="column"></slot>
+      <tr v-for="row in rows">
+        <slot :row="row"></slot>
       </tr>
     </tbody>
   </table>
@@ -18,8 +18,25 @@ export default {
   name: 'CaTable',
   props: {
     actions: Array,
-    columns: Array,
     rows: Array,
+  },
+  data() {
+    return {
+      columns: [],
+      _isTable: true,
+    };
+  },
+  methods: {
+    hasColumn(vmColumn) {
+      return this.columns
+        .map(column => column.name)
+        .includes(vmColumn.name);
+    },
+    addColumn(vmColumn) {
+      if (!this.hasColumn(vmColumn)) {
+        this.columns.push(vmColumn);
+      }
+    },
   },
 };
 </script>
