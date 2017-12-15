@@ -1,5 +1,8 @@
 <template>
-  <button class="button" type="button" name="button">
+  <router-link v-if="to" class="button" :to="to">
+    <slot></slot>
+  </router-link>
+  <button v-else class="button" :type="type">
     <slot></slot>
   </button>
 </template>
@@ -7,6 +10,13 @@
 <script>
 export default {
   name: 'CaButton',
+  props: {
+    to: Object,
+    type: {
+      type: String,
+      default: 'button',
+    },
+  },
 };
 </script>
 

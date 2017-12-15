@@ -3,7 +3,7 @@
          :placeholder="placeholder"
          :type="type"
          :value="value"
-         @input="$emit('input', $event.target.value)">
+         @input="onInput">
 </template>
 
 <script>
@@ -12,9 +12,22 @@ export default {
   props: {
     placeholder: String,
     value: [String, Number],
+    case: {
+      type: String,
+      validator(value) {
+        return ['upper'].includes(value);
+      },
+    },
     type: {
       type: String,
       default: 'text',
+    },
+  },
+  methods: {
+    onInput(event) {
+      this.$emit('input', this.case === 'upper'
+        ? event.target.value.toUpperCase()
+        : event.target.value);
     },
   },
 };

@@ -1,12 +1,24 @@
 <template>
-  <div class="field">
-    <slot></slot>
+  <div class="field" :class="{ 'is-horizontal': isHorizontal }">
+    <div class="field-label" v-if="isHorizontal">
+      <label v-if="label" class="label">{{ label }}</label>
+    </div>
+    <label v-else-if="label" class="label">{{ label }}</label>
+    <div class="field-body" v-if="isHorizontal">
+      <slot></slot>
+    </div>
+    <slot v-else></slot>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CaField',
+  props: {
+    label: String,
+    isHorizontal: Boolean,
+    size: String,
+  },
 };
 </script>
 
@@ -14,7 +26,9 @@ export default {
 @import '~@/assets/variables';
 
 .field {
-  height: $control-height;
+  &.is-large {
+    height: $control-height;
+  }
 
   &.is-grouped {
     > .control {
