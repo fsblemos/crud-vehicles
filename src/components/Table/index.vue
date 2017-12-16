@@ -47,6 +47,7 @@ table {
   border-radius: 3px;
   border: 1px solid #C9D3DD;
   color: inherit;
+  margin-bottom: 2rem;
 
   td,
   th {

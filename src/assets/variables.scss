@@ -6,4 +6,10 @@ $danger: #b44747;
 
 $control-height: 40px;
 
+$pagination-border-color: $grey-lighter;
+$pagination-hover-border-color: $grey-lighter;
+$pagination-current-border-color: #8bc8f6;
+$pagination-current-background-color: #d8e9fb;
+$pagination-background-color: $white;
+
 @import '../../node_modules/bulma/sass/utilities/derived-variables.sass';

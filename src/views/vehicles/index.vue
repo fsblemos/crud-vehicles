@@ -23,7 +23,7 @@
         </ca-table-column>
       </template>
     </ca-table>
-    <ca-pagination></ca-pagination>
+    <ca-pagination :current="currentPage" :total="vehicles.length"></ca-pagination>
   </ca-section>
 </template>
 
@@ -36,6 +36,11 @@ export default {
     vehicles() {
       return this.$store.state.vehicles;
     },
+  },
+  data() {
+    return {
+      currentPage: 1,
+    };
   },
   methods: {
     getFormattedValue(value) {

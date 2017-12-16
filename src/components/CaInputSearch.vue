@@ -5,7 +5,7 @@
     </div>
     <div class="control">
       <a class="button">
-        <ca-icon icon="fa-search"></ca-icon>
+        <ca-icon icon="search"></ca-icon>
       </a>
     </div>
   </ca-field>

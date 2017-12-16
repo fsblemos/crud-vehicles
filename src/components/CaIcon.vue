@@ -1,6 +1,6 @@
 <template>
   <span class="icon" :class="[`is-${containerSize}`]">
-    <i class="fa" :class="[icon, `fa-${size}`]"></i>
+    <i class="fa" :class="[`fa-${icon}`, `fa-${size}`]"></i>
   </span>
 </template>
 
