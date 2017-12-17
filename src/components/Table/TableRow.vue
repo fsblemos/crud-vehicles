@@ -1,5 +1,8 @@
 <template>
-  <tr :class="{ 'is-selected': row.selected }">
+  <tr :class="{ 'is-selected': selected }">
+    <td v-if="checkbox">
+      <ca-checkbox v-model="isChecked"></ca-checkbox>
+    </td>
     <slot :row="row"></slot>
   </tr>
 </template>
@@ -8,8 +11,10 @@
 export default {
   name: 'CaTableRow',
   props: {
+    checkbox: Boolean,
     actions: Array,
     row: Object,
+    selected: Boolean,
     level: {
       type: Number,
       default: 0,
@@ -17,15 +22,28 @@ export default {
   },
   data() {
     return {
-      isSelected: false,
+      isChecked: false,
     };
   },
+  watch: {
+    isChecked(isChecked) {
+      this.$emit('update:selected', isChecked);
+    },
+    selected(selected) {
+      this.select(selected);
+    },
+  },
   created() {
-    this.$set(this.row, 'selected', false);
+    this.isChecked = this.row.selected;
+
+    if (!this.$parent.$data._isTable) {
+      this.$destroy();
+      throw new Error('You should wrap CaTableRow on a CaTable');
+    }
   },
   methods: {
-    selectRow() {
-      this.row.selected = !this.row.selected;
+    select(value) {
+      this.isChecked = value;
     },
   },
 };
@@ -39,6 +57,8 @@ tr {
 
   td {
     border: 0;
+    height: $control-height;
+    vertical-align: middle;
   }
 
   &.is-selected {

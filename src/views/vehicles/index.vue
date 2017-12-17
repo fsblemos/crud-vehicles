@@ -5,15 +5,12 @@
         <ca-button class="control is-primary" :to="{ name: 'vehicles/insert' }">
           Novo Carro
         </ca-button>
-        <ca-button class="control is-danger">Excluir Carro</ca-button>
+        <ca-button class="control is-danger" @click="removeSelectedRows()">Excluir Carro</ca-button>
       </ca-field>
       <ca-input-search slot="right" class="is-large"></ca-input-search>
     </ca-level>
-    <ca-table :rows="visibleVehicles">
+    <ca-table :rows="vehicles" checkbox>
       <template slot-scope="props">
-        <ca-table-column name="checkbox" :row="props.row">
-          <ca-checkbox class="is-marginless" v-model="props.row.selected"></ca-checkbox>
-        </ca-table-column>
         <ca-table-column label="Placa" name="placa" :row="props.row"></ca-table-column>
         <ca-table-column label="Modelo" name="modelo" :row="props.row"></ca-table-column>
         <ca-table-column label="Marca" name="marca" :row="props.row"></ca-table-column>
@@ -26,7 +23,6 @@
         </ca-table-column>
       </template>
     </ca-table>
-    <ca-pagination :current.sync="currentPage" :total="vehicles.length"></ca-pagination>
   </ca-section>
 </template>
 
@@ -39,21 +35,13 @@ export default {
     vehicles() {
       return this.$store.state.vehicles;
     },
-    visibleVehicles() {
-      const startPage = (this.currentPage - 1) * 5;
-
-      return this.vehicles.slice(startPage, startPage + 5);
-    },
-  },
-  data() {
-    return {
-      currentPage: 1,
-      teste: true,
-    };
   },
   methods: {
     getFormattedValue(value) {
       return numeral(value).format('0,0.00');
+    },
+    removeSelectedRows() {
+      this.$store.commit('removeVehicles', this.vehicles.filter(vehicle => vehicle.selected));
     },
   },
 };

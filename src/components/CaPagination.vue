@@ -75,9 +75,9 @@ export default {
     color: inherit;;
     border-radius: 0;
     cursor: default;
-    height: $control-height;
+    height: 35px;
     margin: 0;
-    width: $control-height;
+    width: 35px;
 
     &:hover {
       background-color: #fffaeb;
