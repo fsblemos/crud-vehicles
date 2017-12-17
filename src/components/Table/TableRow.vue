@@ -1,5 +1,5 @@
 <template>
-  <tr :class="{ 'is-selected': row.selected }" @click="selectRow()">
+  <tr :class="{ 'is-selected': row.selected }">
     <slot :row="row"></slot>
   </tr>
 </template>
@@ -20,9 +20,12 @@ export default {
       isSelected: false,
     };
   },
+  created() {
+    this.$set(this.row, 'selected', false);
+  },
   methods: {
     selectRow() {
-      this.$set(this.row, 'selected', !this.row.selected);
+      this.row.selected = !this.row.selected;
     },
   },
 };

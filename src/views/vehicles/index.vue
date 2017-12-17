@@ -9,9 +9,11 @@
       </ca-field>
       <ca-input-search slot="right" class="is-large"></ca-input-search>
     </ca-level>
-    <!-- <keep-alive> -->
     <ca-table :rows="visibleVehicles">
       <template slot-scope="props">
+        <ca-table-column name="checkbox" :row="props.row">
+          <ca-checkbox class="is-marginless" v-model="props.row.selected"></ca-checkbox>
+        </ca-table-column>
         <ca-table-column label="Placa" name="placa" :row="props.row"></ca-table-column>
         <ca-table-column label="Modelo" name="modelo" :row="props.row"></ca-table-column>
         <ca-table-column label="Marca" name="marca" :row="props.row"></ca-table-column>
@@ -24,7 +26,6 @@
         </ca-table-column>
       </template>
     </ca-table>
-    <!-- </keep-alive> -->
     <ca-pagination :current.sync="currentPage" :total="vehicles.length"></ca-pagination>
   </ca-section>
 </template>
@@ -47,6 +48,7 @@ export default {
   data() {
     return {
       currentPage: 1,
+      teste: true,
     };
   },
   methods: {

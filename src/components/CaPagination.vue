@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     numberOfPages() {
-      return 50; // Math.ceil(this.total / this.perPage);
+      return Math.ceil(this.total / this.perPage);
     },
     pagesList() {
       return Array.from(new Array(this.numberOfPages), (val, index) => index + 1);
