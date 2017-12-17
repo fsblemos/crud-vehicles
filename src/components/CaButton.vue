@@ -1,8 +1,8 @@
 <template>
-  <router-link v-if="to" class="button" :to="to">
+  <router-link v-if="to" class="button" :to="to" @click="$emit('click', $event)">
     <slot></slot>
   </router-link>
-  <button v-else class="button" :type="type">
+  <button v-else class="button" :type="type" @click="$emit('click', $event)">
     <slot></slot>
   </button>
 </template>

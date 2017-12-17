@@ -4,12 +4,25 @@
 $primary: #4ab858;
 $danger: #b44747;
 
+$body-background-color: #f1f4f9;
+
 $control-height: 40px;
+
+$font-color: #395a7a;
+
+$blue-light: #d8e9fb;
+$blue-light-border: #8bc8f6;
 
 $pagination-border-color: $grey-lighter;
 $pagination-hover-border-color: $grey-lighter;
-$pagination-current-border-color: #8bc8f6;
-$pagination-current-background-color: #d8e9fb;
+$pagination-current-border-color: $blue-light-border;
+$pagination-current-background-color: $blue-light;
 $pagination-background-color: $white;
+
+$table-row-border-color: #c9d3dd;
+$table-row-active-background-color: $blue-light;
+$table-row-active-border-color: $blue-light-border;
+$table-row-active-color: $font-color;
+
 
 @import '../../node_modules/bulma/sass/utilities/derived-variables.sass';

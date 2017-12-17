@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     vehicles: [{
       combustivel: 'Flex',
@@ -27,5 +29,11 @@ export default new Vuex.Store({
       placa: 'PAI-4121',
       valor: '20000',
     }],
+  },
+  mutations: {
+    addVehicle(state, vehicle) {
+      debugger;
+      state.vehicles.push(vehicle);
+    },
   },
 });

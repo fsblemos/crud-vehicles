@@ -9,7 +9,8 @@
       </ca-field>
       <ca-input-search slot="right" class="is-large"></ca-input-search>
     </ca-level>
-    <ca-table :rows="vehicles">
+    <!-- <keep-alive> -->
+    <ca-table :rows="visibleVehicles">
       <template slot-scope="props">
         <ca-table-column label="Placa" name="placa" :row="props.row"></ca-table-column>
         <ca-table-column label="Modelo" name="modelo" :row="props.row"></ca-table-column>
@@ -23,7 +24,8 @@
         </ca-table-column>
       </template>
     </ca-table>
-    <ca-pagination :current="currentPage" :total="vehicles.length"></ca-pagination>
+    <!-- </keep-alive> -->
+    <ca-pagination :current.sync="currentPage" :total="vehicles.length"></ca-pagination>
   </ca-section>
 </template>
 
@@ -35,6 +37,11 @@ export default {
   computed: {
     vehicles() {
       return this.$store.state.vehicles;
+    },
+    visibleVehicles() {
+      const startPage = (this.currentPage - 1) * 5;
+
+      return this.vehicles.slice(startPage, startPage + 5);
     },
   },
   data() {

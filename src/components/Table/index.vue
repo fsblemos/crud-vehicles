@@ -6,9 +6,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="row in rows">
+      <ca-table-row :row="row" v-for="(row, index) in rows" :key="index">
         <slot :row="row"></slot>
-      </tr>
+      </ca-table-row>
     </tbody>
   </table>
 </template>
@@ -43,23 +43,15 @@ export default {
 
 <style lang="scss" scoped>
 table {
-  border-collapse: separate;
-  border-radius: 3px;
-  border: 1px solid #C9D3DD;
+  // border-radius: 3px;
+  border: 1px solid #c9d3dd;
   color: inherit;
   margin-bottom: 2rem;
-
-  td,
-  th {
-    vertical-align: middle;
-  }
 
   thead {
     th {
       background-color: #f8fafc;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      border-width: 0 0 1px;
+      border: 0;
       color: inherit;
       height: 30px;
     }

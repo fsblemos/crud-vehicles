@@ -1,9 +1,10 @@
 <template>
   <input class="input"
-         :placeholder="placeholder"
-         :type="type"
-         :value="value"
-         @input="onInput">
+        :class="[`is-${size}`]"
+        :placeholder="placeholder"
+        :type="type"
+        :value="value"
+        @input="onInput">
 </template>
 
 <script>
@@ -12,10 +13,17 @@ export default {
   props: {
     placeholder: String,
     value: [String, Number],
+    // label: String,
     case: {
       type: String,
       validator(value) {
         return ['upper'].includes(value);
+      },
+    },
+    size: {
+      type: String,
+      validator(size) {
+        return ['small', 'medium', 'large'].includes(size);
       },
     },
     type: {

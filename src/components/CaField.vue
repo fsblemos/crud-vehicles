@@ -1,7 +1,7 @@
 <template>
   <div class="field" :class="{ 'is-horizontal': isHorizontal }">
-    <div class="field-label" v-if="isHorizontal">
-      <label v-if="label" class="label">{{ label }}</label>
+    <div class="field-label is-normal" v-if="isHorizontal">
+      <label v-if="label" class="label is-medium">{{ label }}</label>
     </div>
     <label v-else-if="label" class="label">{{ label }}</label>
     <div class="field-body" v-if="isHorizontal">
@@ -29,6 +29,25 @@ export default {
   &.is-large {
     height: $control-height;
   }
+
+  .field-label {
+    font-size: initial;
+
+    .label {
+      &.is-medium {
+        font-size: 14px;
+      }
+    }
+  }
+
+  // &.is-horizontal {
+  //   .field-label {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: flex-end;
+  //   }
+  // }
+
 
   &.is-grouped {
     > .control {

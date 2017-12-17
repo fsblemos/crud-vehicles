@@ -2,7 +2,7 @@
   <nav class="pagination is-centered">
     <ul class="pagination-list">
       <li>
-        <a class="pagination-previous">
+        <a class="pagination-previous" @click="first()">
           <ca-icon icon="angle-double-left" container-size="small" size="lg"></ca-icon>
         </a>
       </li>
@@ -14,7 +14,7 @@
         </a>
       </li>
       <li>
-        <a class="pagination-next">
+        <a class="pagination-next" @click="last()">
           <ca-icon icon="angle-double-right" container-size="small" size="lg"></ca-icon>
         </a>
       </li>
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import range from 'lodash/range';
-
 export default {
   name: 'CaPagination',
   props: {
@@ -43,10 +41,18 @@ export default {
   },
   computed: {
     numberOfPages() {
-      return Math.ceil(this.total / this.perPage);
+      return 50; // Math.ceil(this.total / this.perPage);
     },
     pagesList() {
       return Array.from(new Array(this.numberOfPages), (val, index) => index + 1);
+    },
+  },
+  methods: {
+    first() {
+      this.$emit('update:current', 1);
+    },
+    last() {
+      this.$emit('update:current', this.numberOfPages);
     },
   },
 };

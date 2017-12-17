@@ -1,12 +1,6 @@
 <template>
-  <tr>
-    <td v-for="(column, index) in $parent.columns" :key="index">
-      <div class="level" :style="{ marginLeft: index === 0 && `${level}rem` }">
-        <slot>
-          {{ row[column.index] }}
-        </slot>
-      </div>
-    </td>
+  <tr :class="{ 'is-selected': row.selected }" @click="selectRow()">
+    <slot :row="row"></slot>
   </tr>
 </template>
 
@@ -21,15 +15,44 @@ export default {
       default: 0,
     },
   },
+  data() {
+    return {
+      isSelected: false,
+    };
+  },
+  methods: {
+    selectRow() {
+      this.$set(this.row, 'selected', !this.row.selected);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/variables";
+
 tr {
-  color: inherit;
+  border: 1px solid $table-row-border-color;
 
   td {
-    vertical-align: middle;
+    border: 0;
+  }
+
+  &.is-selected {
+    $border-row-active: 1px solid $table-row-active-border-color;
+
+    td {
+      border-top: $border-row-active;
+      border-bottom: $border-row-active !important;
+
+      &:first-child {
+        border-left: $border-row-active;
+      }
+
+      &:last-child {
+        border-right: $border-row-active;
+      }
+    }
   }
 }
 </style>

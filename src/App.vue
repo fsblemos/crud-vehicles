@@ -6,22 +6,20 @@
 </template>
 
 <script>
-import numeral from '@/utils/numeral';
-
 export default {
   name: 'app',
 };
 </script>
 
 <style lang="scss">
-@import './assets/style.scss';
+@import '~@/assets/variables';
+@import '~@/assets/style';
 
 html,
 body {
-  color: #395A7A;
+  color: $font-color;
   font-size: 13px;
   line-height: 20px;
   margin: 0;
-  background-color: #F1F4F9;
 }
 </style>

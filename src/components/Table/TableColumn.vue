@@ -20,12 +20,12 @@ export default {
     row: Object,
   },
   created() {
-    if (!this.$parent.$data._isTable) {
+    if (!this.$parent.$parent.$data._isTable) {
       this.$destroy();
       throw new Error('You should wrap CaTableColumn on a CaTable');
     }
 
-    this.$parent.addColumn(this);
+    this.$parent.$parent.addColumn(this);
   },
 };
 </script>
