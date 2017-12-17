@@ -34,7 +34,7 @@ export default {
     },
   },
   created() {
-    this.isChecked = this.row.selected;
+    this.isChecked = this.row.selected || false;
 
     if (!this.$parent.$data._isTable) {
       this.$destroy();

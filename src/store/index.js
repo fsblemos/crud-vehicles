@@ -32,8 +32,10 @@ export default new Vuex.Store({
   },
   mutations: {
     addVehicle(state, vehicle) {
-      debugger;
       state.vehicles.push(vehicle);
+    },
+    removeVehicles(state, vehicles) {
+      state.vehicles = state.vehicles.filter(vehicle => !vehicles.includes(vehicle));
     },
   },
 });

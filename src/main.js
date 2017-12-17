@@ -5,21 +5,17 @@ import App from './App';
 import router from './router';
 import store from './store';
 
+require('./utils/global-components');
+
 Vue.config.productionTip = false;
 
-const requireFile = requireContext => () => {
-  requireContext.keys().forEach((fileName) => {
-    let baseComponentConfig = requireContext(fileName);
-
-    baseComponentConfig = baseComponentConfig.default || baseComponentConfig;
-
-    const baseComponentName = baseComponentConfig.name || fileName.replace(/^.+\//, '').replace(/\.\w+$/, '');
-
-    Vue.component(baseComponentName, baseComponentConfig);
-  });
-};
-
-requireFile(require.context('./components', true, /\.vue$/))();
+Vue.directive('focus', {
+  inserted: (el, binding) => {
+    if (binding.value) {
+      el.focus();
+    }
+  },
+});
 
 /* eslint-disable no-new */
 new Vue({

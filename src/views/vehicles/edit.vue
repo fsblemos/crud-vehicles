@@ -16,7 +16,13 @@
           <div class="column is-8 is-offset-2">
             <ca-form @submit="save(form)">
               <ca-field label="Placa" is-horizontal>
-                <ca-input v-model="form.placa" case="upper" maxlength="7" size="large"></ca-input>
+                <ca-input v-model="form.placa"
+                          case="upper"
+                          maxlength="7"
+                          size="large"
+                          required
+                          focus>
+                </ca-input>
               </ca-field>
               <ca-field label="Modelo" is-horizontal>
                 <ca-input v-model="form.modelo" size="large"></ca-input>
@@ -51,14 +57,21 @@ export default {
   name: 'VehiclesEdit',
   data() {
     return {
-      form: {
-        placa: null, modelo: null, marca: null, imagem: null, combustivel: null, valor: null,
-      },
+      form: {},
     };
+  },
+  created() {
+    this.clearForm();
   },
   methods: {
     save(vehicle) {
       this.$store.commit('addVehicle', vehicle);
+      this.clearForm();
+    },
+    clearForm() {
+      this.form = {
+        placa: null, modelo: null, marca: null, imagem: null, combustivel: null, valor: null,
+      };
     },
   },
 };

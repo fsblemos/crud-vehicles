@@ -4,16 +4,25 @@
         :placeholder="placeholder"
         :type="type"
         :value="value"
+        v-focus="focus"
         @input="onInput">
 </template>
 
 <script>
+const getParentForm = (vm) => {
+  if (vm.$parent.$options.name === 'CaForm') {
+    return vm.$parent;
+  }
+
+  return getParentForm(vm.$parent);
+};
+
 export default {
   name: 'CaInput',
   props: {
+    focus: Boolean,
     placeholder: String,
     value: [String, Number],
-    // label: String,
     case: {
       type: String,
       validator(value) {
@@ -30,6 +39,18 @@ export default {
       type: String,
       default: 'text',
     },
+  },
+  data() {
+    return {
+      _isControl: true,
+    };
+  },
+  mounted() {
+    const form = getParentForm(this);
+
+    if (form) {
+      form.addControl(this);
+    }
   },
   methods: {
     onInput(event) {
