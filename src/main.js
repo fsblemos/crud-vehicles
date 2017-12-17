@@ -1,9 +1,10 @@
 import 'font-awesome/css/font-awesome.min.css';
 
 import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
+import App from '@/App';
+import router from '@/router';
+import store from '@/store';
+import Toasted from 'vue-toasted';
 
 require('./utils/global-components');
 
@@ -15,6 +16,13 @@ Vue.directive('focus', {
       el.focus();
     }
   },
+});
+
+Vue.use(Toasted, {
+  duration: 2000,
+  iconPack: 'fontawesome',
+  position: 'top-center',
+  theme: 'bubble',
 });
 
 /* eslint-disable no-new */

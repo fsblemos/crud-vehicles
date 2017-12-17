@@ -8,18 +8,17 @@
         </tr>
       </thead>
       <tbody>
-        <ca-table-row
-          v-for="(row, index) in visibleRows"
-          :key="row.placa"
-          :row="row"
-          :checkbox="checkbox"
-          :selected.sync="row.selected">
+        <ca-table-row v-for="(row, index) in visibleRows"
+                      :key="row.placa"
+                      :row="row"
+                      :checkbox="checkbox"
+                      :selected.sync="row.selected">
           <slot :row="row"></slot>
         </ca-table-row>
       </tbody>
     </table>
     <slot name="pagination">
-      <ca-pagination :current.sync="currentPage" :total="rows.length"></ca-pagination>
+      <ca-pagination :current.sync="currentPage" :total="rows.length" :per-page="perPage"></ca-pagination>
     </slot>
   </div>
 </template>
@@ -31,6 +30,10 @@ export default {
     actions: Array,
     rows: Array,
     checkbox: Boolean,
+    perPage: {
+      type: Number,
+      default: 5,
+    },
   },
   data() {
     return {
@@ -49,13 +52,11 @@ export default {
   },
   computed: {
     visibleRows() {
-      const startPage = (this.currentPage - 1) * 5;
+      const startPage = (this.currentPage - 1) * this.perPage;
+      const endPage = startPage + this.perPage;
 
-      return this.rows.filter((row, index) => index >= startPage && index < startPage + 5);
+      return this.rows.filter((row, index) => index >= startPage && index < endPage);
     },
-    // vmRows() {
-    //   return this.$children.filter(child => child.$options.name === 'CaTableRow');
-    // },
   },
   methods: {
     hasColumn(vmColumn) {

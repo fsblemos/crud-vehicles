@@ -1,5 +1,5 @@
 <template>
-  <div class="field" :class="{ 'is-horizontal': isHorizontal }">
+  <div class="field" :class="[`is-${size}`, { 'is-horizontal': isHorizontal, 'is-required': required }]">
     <div class="field-label is-normal" v-if="isHorizontal">
       <label v-if="label" class="label is-medium">{{ label }}</label>
     </div>
@@ -18,6 +18,7 @@ export default {
     label: String,
     isHorizontal: Boolean,
     size: String,
+    required: Boolean,
   },
 };
 </script>
@@ -26,6 +27,15 @@ export default {
 @import '~@/assets/variables';
 
 .field {
+  &.is-required {
+    .label {
+      &:after {
+        content: '*';
+        color: red;
+      }
+    }
+  }
+
   &.is-large {
     height: $control-height;
   }
@@ -39,15 +49,6 @@ export default {
       }
     }
   }
-
-  // &.is-horizontal {
-  //   .field-label {
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: flex-end;
-  //   }
-  // }
-
 
   &.is-grouped {
     > .control {

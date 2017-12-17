@@ -1,14 +1,11 @@
 <template>
-  <ca-field class="has-addons">
-    <div class="control">
-      <ca-input placeholder="Pesquisar"></ca-input>
-    </div>
+  <ca-input placeholder="Pesquisar" size="large" has-addons>
     <div class="control">
       <a class="button">
         <ca-icon icon="search"></ca-icon>
       </a>
     </div>
-  </ca-field>
+  </ca-input>
 </template>
 
 <script>

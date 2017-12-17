@@ -7,7 +7,7 @@
         </ca-button>
         <ca-button class="control is-danger" @click="removeSelectedRows()">Excluir Carro</ca-button>
       </ca-field>
-      <ca-input-search slot="right" class="is-large"></ca-input-search>
+      <ca-input-search slot="right"></ca-input-search>
     </ca-level>
     <ca-table :rows="vehicles" checkbox>
       <template slot-scope="props">
@@ -41,7 +41,11 @@ export default {
       return numeral(value).format('0,0.00');
     },
     removeSelectedRows() {
-      this.$store.commit('removeVehicles', this.vehicles.filter(vehicle => vehicle.selected));
+      const vehicles = this.vehicles.filter(vehicle => vehicle.selected);
+      const plural = vehicles.length > 1 ? 's' : '';
+
+      this.$store.commit('removeVehicles', vehicles);
+      this.$toasted.success(`Veículo${plural} removido${plural} com sucesso!`, { icon: 'car' });
     },
   },
 };
