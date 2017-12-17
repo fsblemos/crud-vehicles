@@ -1,5 +1,6 @@
 <template>
-  <div class="field" :class="[`is-${size}`, { 'is-horizontal': isHorizontal, 'is-required': required }]">
+  <div class="field"
+       :class="[`is-${size}`, { 'is-horizontal': isHorizontal, 'is-required': required }]">
     <div class="field-label is-normal" v-if="isHorizontal">
       <label v-if="label" class="label is-medium">{{ label }}</label>
     </div>
@@ -32,6 +33,8 @@ export default {
       &:after {
         content: '*';
         color: red;
+        position: absolute;
+        margin-left: 2px;
       }
     }
   }

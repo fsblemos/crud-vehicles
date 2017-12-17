@@ -1,20 +1,29 @@
 <template>
-  <ca-field class="is-expanded" :label="label" :size="size" :required="required" is-horizontal :class="{ 'has-addons': hasAddons }">
+  <ca-field class="is-expanded"
+            is-horizontal
+            :label="label"
+            :size="size"
+            :required="required"
+            :class="{ 'has-addons': hasAddons }">
     <div class="control">
       <input class="input"
-            :class="[`is-${size}`]"
-            :placeholder="placeholder"
-            :type="type"
-            :value="value"
-            v-bind="$attrs"
-            v-focus="focus"
-            @input="onInput">
+             ref="input"
+             :class="[`is-${size}`]"
+             :placeholder="placeholder"
+             :type="type"
+             v-bind="$attrs"
+             v-focus="focus"
+             @blur="onBlur"
+             @input="onInput">
     </div>
     <slot></slot>
   </ca-field>
 </template>
 
 <script>
+import IMask from 'imask';
+import Control from '@/mixins/control';
+
 const getParentForm = (vm) => {
   if (vm) {
     if (vm.$parent && vm.$parent.$options.name === 'CaForm') {
@@ -29,29 +38,24 @@ const getParentForm = (vm) => {
 
 export default {
   name: 'CaInput',
+  mixins: [Control],
   props: {
     focus: Boolean,
-    hasAddons: Boolean,
-    label: String,
+    mask: Object,
     placeholder: String,
-    required: Boolean,
-    value: [String, Number],
-    case: {
-      type: String,
-      validator(value) {
-        return ['upper'].includes(value);
-      },
-    },
-    size: {
-      type: String,
-      validator(size) {
-        return ['small', 'medium', 'large'].includes(size);
-      },
-      default: 'large',
-    },
+    masked: Boolean,
     type: {
       type: String,
       default: 'text',
+    },
+  },
+  watch: {
+    value(value) {
+      this.$refs.input.value = value;
+
+      if (this.imask) {
+        this.imask.value = value;
+      }
     },
   },
   computed: {
@@ -65,12 +69,21 @@ export default {
     if (form) {
       form.addControl(this);
     }
+
+    if (this.mask) {
+      this.imask = new IMask(this.$refs.input, this.mask);
+    }
   },
   methods: {
+    onBlur() {
+      if (this.mask) {
+        this.$emit('input', this.masked ? this.imask.value : this.imask.unmaskedValue);
+      }
+    },
     onInput(event) {
-      this.$emit('input', this.case === 'upper'
-        ? event.target.value.toUpperCase()
-        : event.target.value);
+      if (!this.mask) {
+        this.$emit('input', event.target.value);
+      }
     },
     setFocus() {
       this.$el.focus();
@@ -80,17 +93,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.control {
-  flex-grow: 1;
-
-  .input {
-    box-shadow: none;
-    padding-left: 1rem;
-
-
-    &.is-large {
-      font-size: 1rem;
-    }
-  }
-}
+@import '~@/assets/input';
 </style>

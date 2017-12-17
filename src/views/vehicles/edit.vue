@@ -14,19 +14,21 @@
       <div class="card-content">
         <div class="columns">
           <div class="column is-9 is-offset-1">
+            {{ form }}
             <ca-form ref="form" @submit="save(form)">
               <ca-input label="Placa"
                         v-model="form.placa"
                         case="upper"
-                        maxlength="7"
+                        masked
                         required
-                        focus>
+                        focus
+                        :mask="{ mask: 'aaa-0000', prepare: str => str.toUpperCase() }">
               </ca-input>
               <ca-input label="Modelo" v-model="form.modelo" required></ca-input>
               <ca-input label="Marca" v-model="form.marca" required></ca-input>
               <ca-input label="Foto" v-model="form.imagem"></ca-input>
               <ca-input label="Combustível" v-model="form.combustivel"></ca-input>
-              <ca-input label="Valor" v-model="form.valor" type="number"></ca-input>
+              <ca-money label="Valor" v-model="form.valor"></ca-money>
             </ca-form>
           </div>
         </div>
@@ -59,7 +61,7 @@ export default {
     },
     clearForm() {
       this.form = {
-        placa: null, modelo: null, marca: null, imagem: null, combustivel: null, valor: null,
+        placa: '', modelo: '', marca: '', imagem: '', combustivel: '', valor: 0,
       };
     },
     submit() {

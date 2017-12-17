@@ -5,6 +5,7 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import Toasted from 'vue-toasted';
+import VueMask from 'v-mask';
 
 require('./utils/global-components');
 
@@ -18,6 +19,7 @@ Vue.directive('focus', {
   },
 });
 
+Vue.use(VueMask);
 Vue.use(Toasted, {
   duration: 2000,
   iconPack: 'fontawesome',
