@@ -1,5 +1,5 @@
 <template>
-  <td :style="style">
+  <td :style="style" :class="[hidden]">
     <slot>
       <template v-if="row">
         {{ row[name] }}
@@ -12,12 +12,13 @@
 export default {
   name: 'CaTableColumn',
   props: {
+    hidden: String,
+    label: String,
+    row: Object,
     name: {
       type: String,
       required: true,
     },
-    label: String,
-    row: Object,
     align: {
       type: String,
       validator(align) {

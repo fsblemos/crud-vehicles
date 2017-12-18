@@ -21,7 +21,7 @@ Vue.directive('focus', {
 Vue.use(Toasted, {
   duration: 2000,
   iconPack: 'fontawesome',
-  position: 'top-center',
+  position: 'bottom-center',
   theme: 'bubble',
 });
 

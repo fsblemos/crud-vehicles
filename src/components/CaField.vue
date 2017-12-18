@@ -5,7 +5,7 @@
       <label v-if="label" class="label is-medium">{{ label }}</label>
     </div>
     <label v-else-if="label" class="label">{{ label }}</label>
-    <div class="field-body" v-if="isHorizontal">
+    <div class="field-body" v-if="isHorizontal && label">
       <slot></slot>
     </div>
     <slot v-else></slot>
@@ -45,6 +45,10 @@ export default {
 
   .field-label {
     font-size: initial;
+
+    &.is-normal {
+      padding-top: .7rem;
+    }
 
     .label {
       &.is-medium {

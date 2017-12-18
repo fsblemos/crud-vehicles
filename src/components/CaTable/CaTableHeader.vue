@@ -1,12 +1,12 @@
 <template>
   <tr>
-    <th width="1" class="th-checkbox">
+    <th width="1px" class="th-checkbox">
       <ca-checkbox :value="selectAll"
                    @input="value => $emit('update:selectAll', value)"
                    class="is-marginless">
       </ca-checkbox>
     </th>
-    <th v-for="column in columns" :style="getStyle(column)">
+    <th v-for="column in columns" :class="[column.hidden]" :style="getStyle(column)">
       {{ column.label }}
     </th>
   </tr>
@@ -19,11 +19,6 @@ export default {
     columns: Array,
     selectAll: Boolean,
   },
-  // data() {
-  //   return {
-  //     selectAll: false,
-  //   };
-  // },
   computed: {
     style() {
       return {

@@ -86,7 +86,7 @@ export default {
       }
     },
     setFocus() {
-      this.$el.focus();
+      this.$refs.input.focus();
     },
   },
 };

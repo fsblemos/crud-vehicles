@@ -15,8 +15,8 @@
           {{ getFormattedPlate(props.row.placa) }}
         </ca-table-column>
         <ca-table-column label="Modelo" name="modelo" width="20%" :row="props.row"></ca-table-column>
-        <ca-table-column label="Marca" name="marca" width="20%" :row="props.row"></ca-table-column>
-        <ca-table-column label="Foto" name="imagem" width="15%" :row="props.row">
+        <ca-table-column label="Marca" name="marca" width="20%" hidden="is-hidden-mobile" :row="props.row"></ca-table-column>
+        <ca-table-column label="Foto" name="imagem" width="15%" hidden="is-hidden-mobile" :row="props.row">
           <a  v-if="props.row.imagem" class="image" :href="props.row.imagem">Imagem</a>
         </ca-table-column>
         <ca-table-column label="Combustível" name="combustivel" width="10%" :row="props.row"></ca-table-column>
@@ -65,9 +65,13 @@ export default {
       const vehicles = this.vehicles.filter(vehicle => vehicle.selected);
       const plural = vehicles.length > 1 ? 's' : '';
 
-      this.$store.commit('removeVehicles', vehicles);
-      this.$toasted.success(`Veículo${plural} removido${plural} com sucesso!`, { icon: 'car' });
-      this.searchVehicles();
+      if (vehicles.length) {
+        this.$store.commit('removeVehicles', vehicles);
+        this.$toasted.success(`Veículo${plural} removido${plural} com sucesso!`, { icon: 'car' });
+        this.searchVehicles();
+      } else {
+        this.$toasted.info('Nenhum veículo selecionado!');
+      }
     },
   },
 };

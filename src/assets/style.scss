@@ -1,6 +1,12 @@
 @import './variables.scss';
 @import '../node_modules/bulma/bulma.sass';
 
-.toasted.bubble.error {
-  background: $danger;
+.toasted.bubble {
+  &.error {
+    background: $danger;
+  }
+
+  &.info {
+    background: $info;
+  }
 }
