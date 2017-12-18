@@ -1,21 +1,19 @@
-# crud-vehicle
+# CRUD de Veículos
 
-> A Vue.js project
+> Cadastro de veículos
 
-## Build Setup
+## Setup
 
 ``` bash
-# install dependencies
+# instalar dependências
 npm install
 
-# serve with hot reload at localhost:8080
+# servir com hot reload em localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
+# build da aplicação e bundle report
 npm run build --report
 ```
+Abrir http://localhost:8080 no navegador.
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Os dados são persistidos utilizando o Vuex e localStorage. Para resetar os dados com os valores iniciais, basta rodar `localStorage.clear()` no console.

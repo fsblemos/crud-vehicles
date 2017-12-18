@@ -16,6 +16,7 @@
           <div class="column is-9 is-offset-1">
             <ca-form ref="form" @submit="save(form)">
               <ca-input label="Placa"
+                        ref="placa"
                         v-model="form.placa"
                         case="upper"
                         masked
@@ -55,9 +56,14 @@ export default {
   },
   methods: {
     save(vehicle) {
-      this.$store.commit('addVehicle', vehicle);
-      this.$toasted.success('Veículo incluído com sucesso!', { icon: 'car' });
-      this.clearForm();
+      if (vehicle.placa.length !== 8) {
+        this.$toasted.error('Placa informada é inválida!', { icon: 'close' });
+        this.$refs.placa.setFocus();
+      } else {
+        this.$store.commit('addVehicle', vehicle);
+        this.$toasted.success('Veículo incluído com sucesso!', { icon: 'car' });
+        this.clearForm();
+      }
     },
     clearForm() {
       this.form = {

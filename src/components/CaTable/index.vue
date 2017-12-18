@@ -1,7 +1,7 @@
 <template>
   <div class="ca-table">
     <table class="table is-hoverable is-fullwidth"
-           :style="{ borderStyle:  visibleRows.length ? 'solid': 'dashed' }">
+           :style="{ borderStyle: visibleRows.length ? 'solid': 'dashed' }">
       <thead>
         <ca-table-header v-if="visibleRows.length"
                          :columns="columns"
@@ -64,9 +64,15 @@ export default {
   },
   watch: {
     selectAll(selectAll) {
-      this.rows.forEach((row) => {
-        this.$set(row, 'selected', selectAll);
-      });
+      if (selectAll) {
+        this.visibleRows.forEach((row) => {
+          this.$set(row, 'selected', selectAll);
+        });
+      } else {
+        this.rows.forEach((row) => {
+          this.$set(row, 'selected', selectAll);
+        });
+      }
     },
     visibleRows(visibleRows) {
       if (!visibleRows.length && this.currentPage > 1) {

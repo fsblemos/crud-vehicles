@@ -23,6 +23,12 @@ export default {
 .navbar-brand {
   .navbar-item {
     padding-left: 3rem;
+
+    &:hover {
+      background-color: inherit;
+      color: inherit;
+      cursor: default;
+    }
   }
 }
 
