@@ -1,7 +1,7 @@
 <template>
   <tr :class="{ 'is-selected': selected }">
-    <td v-if="checkbox">
-      <ca-checkbox v-model="isChecked"></ca-checkbox>
+    <td class="td-checkbox" v-if="checkbox">
+      <ca-checkbox v-model="isChecked" class="is-marginless"></ca-checkbox>
     </td>
     <slot :row="row"></slot>
   </tr>

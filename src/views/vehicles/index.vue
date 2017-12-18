@@ -6,22 +6,21 @@
           Novo Carro
         </ca-button>
         <ca-button class="control is-danger" @click="removeSelectedRows()">Excluir Carro</ca-button>
-        {{ search }}
       </ca-field>
       <ca-input-search slot="right" v-model="search" @search="searchVehicles"></ca-input-search>
     </ca-level>
     <ca-table :rows="listedVehicles" checkbox>
       <template slot-scope="props">
-        <ca-table-column label="Placa" name="placa" :row="props.row">
+        <ca-table-column label="Placa" name="placa" width="20%" :row="props.row">
           {{ getFormattedPlate(props.row.placa) }}
         </ca-table-column>
-        <ca-table-column label="Modelo" name="modelo" :row="props.row"></ca-table-column>
-        <ca-table-column label="Marca" name="marca" :row="props.row"></ca-table-column>
-        <ca-table-column label="Imagem" name="imagem" :row="props.row">
-          <a v-if="props.row.imagem" :href="props.row.imagem">Imagem</a>
+        <ca-table-column label="Modelo" name="modelo" width="20%" :row="props.row"></ca-table-column>
+        <ca-table-column label="Marca" name="marca" width="20%" :row="props.row"></ca-table-column>
+        <ca-table-column label="Foto" name="imagem" width="15%" :row="props.row">
+          <a  v-if="props.row.imagem" class="image" :href="props.row.imagem">Imagem</a>
         </ca-table-column>
-        <ca-table-column label="Combustível" name="combustivel" :row="props.row"></ca-table-column>
-        <ca-table-column label="Valor" name="valor" :row="props.row">
+        <ca-table-column label="Combustível" name="combustivel" width="10%" :row="props.row"></ca-table-column>
+        <ca-table-column label="Valor" name="valor" width="20%" align="right" :row="props.row">
           {{ getFormattedValue(props.row.valor) }}
         </ca-table-column>
       </template>
@@ -73,3 +72,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.image {
+  text-decoration: underline;
+}
+</style>

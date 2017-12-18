@@ -63,5 +63,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/input';
+@import '~@/assets/control';
 </style>

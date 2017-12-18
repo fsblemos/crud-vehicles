@@ -14,7 +14,6 @@
       <div class="card-content">
         <div class="columns">
           <div class="column is-9 is-offset-1">
-            {{ form }}
             <ca-form ref="form" @submit="save(form)">
               <ca-input label="Placa"
                         v-model="form.placa"
@@ -27,7 +26,7 @@
               <ca-input label="Modelo" v-model="form.modelo" required></ca-input>
               <ca-input label="Marca" v-model="form.marca" required></ca-input>
               <ca-input label="Foto" v-model="form.imagem"></ca-input>
-              <ca-input label="Combustível" v-model="form.combustivel"></ca-input>
+              <ca-select label="Combustível" v-model="form.combustivel" :options="fuels"></ca-select>
               <ca-money label="Valor" v-model="form.valor"></ca-money>
             </ca-form>
           </div>
@@ -48,6 +47,7 @@ export default {
   data() {
     return {
       form: {},
+      fuels: ['Gasolina', 'Alcool', 'Flex'],
     };
   },
   created() {

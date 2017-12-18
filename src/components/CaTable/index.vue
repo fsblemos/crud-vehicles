@@ -2,10 +2,7 @@
   <div class="ca-table">
     <table class="table is-hoverable is-fullwidth">
       <thead>
-        <tr>
-          <th><ca-checkbox v-model="selectAll"></ca-checkbox></th>
-          <th v-for="column in columns">{{ column.label }}</th>
-        </tr>
+        <ca-table-header :columns="columns" :select-all.sync="selectAll"></ca-table-header>
       </thead>
       <tbody>
         <ca-table-row v-for="(row, index) in visibleRows"
@@ -18,7 +15,10 @@
       </tbody>
     </table>
     <slot name="pagination">
-      <ca-pagination :current.sync="currentPage" :total="rows.length" :per-page="perPage"></ca-pagination>
+      <ca-pagination :current.sync="currentPage"
+                     :total="rows.length"
+                     :per-page="perPage">
+      </ca-pagination>
     </slot>
   </div>
 </template>
@@ -49,6 +49,16 @@ export default {
         this.$set(row, 'selected', selectAll);
       });
     },
+    visibleRows(visibleRows) {
+      if (!visibleRows.length && this.currentPage > 1) {
+        this.currentPage = this.currentPage - 1;
+      }
+    },
+    hasSelectedRow(hasSelectedRow) {
+      if (!hasSelectedRow) {
+        this.selectAll = false;
+      }
+    },
   },
   computed: {
     visibleRows() {
@@ -56,6 +66,9 @@ export default {
       const endPage = startPage + this.perPage;
 
       return this.rows.filter((row, index) => index >= startPage && index < endPage);
+    },
+    hasSelectedRow() {
+      return this.rows.some(row => row.selected);
     },
   },
   methods: {
@@ -79,14 +92,19 @@ table {
   color: inherit;
   margin-bottom: 2rem;
 
-  thead {
-    th {
-      background-color: #f8fafc;
-      border: 0;
-      color: inherit;
-      height: 30px;
-    }
-  }
+  // thead {
+  //   th {
+  //     background-color: #f8fafc;
+  //     border: 0;
+  //     color: inherit;
+  //     height: 30px;
+  //
+  //     // &.checkbox {
+  //     //   vertical-align: middle;
+  //     //   align-items: center;
+  //     // }
+  //   }
+  // }
 }
 
 </style>

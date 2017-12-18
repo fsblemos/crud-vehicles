@@ -1,8 +1,8 @@
 export default {
   props: {
-    value: [String, Number],
     hasAddons: Boolean,
     label: String,
+    value: [String, Number],
     size: {
       type: String,
       validator(size) {

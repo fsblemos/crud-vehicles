@@ -1,5 +1,5 @@
 <template>
-  <td>
+  <td :style="style">
     <slot>
       <template v-if="row">
         {{ row[name] }}
@@ -18,6 +18,25 @@ export default {
     },
     label: String,
     row: Object,
+    align: {
+      type: String,
+      validator(align) {
+        return ['left', 'center', 'right'].includes(align);
+      },
+    },
+  },
+  watch: {
+    selectAll(selectAll) {
+      this.$emit('select-all', selectAll);
+    },
+  },
+  computed: {
+    style() {
+      return {
+        textAlign: this.align,
+        paddingRight: this.align === 'right' ? '20px' : '',
+      };
+    },
   },
   created() {
     if (!this.$parent.$parent.$data._isTable) {

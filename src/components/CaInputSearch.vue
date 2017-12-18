@@ -38,7 +38,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/variables";
+
 .button {
   width: 3rem;
+  background-color: $grey-blue;
 }
 </style>
