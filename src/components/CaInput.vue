@@ -13,7 +13,6 @@
              :type="type"
              v-bind="$attrs"
              v-focus="focus"
-             @blur="onBlur"
              @input="onInput">
     </div>
     <slot></slot>
@@ -72,14 +71,12 @@ export default {
 
     if (this.mask) {
       this.imask = new IMask(this.$refs.input, this.mask);
+      this.imask.on('accept', () => {
+        this.$emit('input', this.masked ? this.imask.value : this.imask.unmaskedValue);
+      });
     }
   },
   methods: {
-    onBlur() {
-      if (this.mask) {
-        this.$emit('input', this.masked ? this.imask.value : this.imask.unmaskedValue);
-      }
-    },
     onInput(event) {
       if (!this.mask) {
         this.$emit('input', event.target.value);
